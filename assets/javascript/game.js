@@ -1,6 +1,9 @@
-//The player will be shown a random number at the start of the game.
-//The random number should be between 19 - 120.
+//The player will be a random number at start of the game.
+//The random number is between 19 - 120.
 var x = Math.floor((Math.random() * 120) + 19);
 window.onload = function() {
-	document.getElementById('p1').innerHTML = x;
+	document.getElementById('randomNumber').innerHTML = x;
 }
+
+//display players score
+var playerScore = 0;
