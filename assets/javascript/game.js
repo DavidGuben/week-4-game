@@ -16,26 +16,55 @@
 //     The player will be a random number at start of the game.
 //     The random number is between 19 - 120.
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	//MAIN GAME FUNCTION
+$( document ).ready(function() {
+			//VARIABLES
+    var randomNum = Math.floor(Math.random() * 120) + 19;
 
-//GLOBAL VARIABLES
-var x = Math.floor((Math.random() * 120) + 19);
-var valueGen = Math.floor((Math.random() * 12) + 1);
-var playerScore = 0;
+    var counter = 0;
 
- //GAME DISPLAY
-window.onload = function gameDisplay() {
-	$('#randomNumber').html(x).addClass("numberFormat");
-	$('#playerCounter').html(playerScore).addClass("numberFormat");
-		var btn1 = $("#button1").data("num", Math.floor((Math.random() * 12) + 1));
-		var btn2 = $("#button2").data("num", Math.floor((Math.random() * 12) + 1));
-		var btn3 = $("#button3").data("num", Math.floor((Math.random() * 12) + 1));
-		var btn4 = $("#button4").data("num", Math.floor((Math.random() * 12) + 1));
-//TAKE THOSE VALUES AND ADD THEM TO THE COUNTER ON CLICK OF THE BUTTON
-	$("button").on("click", function() {
-		$( "#playerCounter" ).append( $( "#button1" ).data( "num" ) );
-		
-	})
-}
+    var numbers = [4, 10, 2, 6];
+    	//NUMBER TO BEAT
+    $('#randomNumber').text(randomNum);
+    	//YOUR NUMBER
+    $("#playerCounter").append("0");
+    	//LOOP CRYSTAL SETUP
+    for (var i=0; i< numbers.length; i++){
 
+      var Crystal = $('<img>');
+      	//ADD DATA TO CRYSTALS
+      Crystal.attr('data-num', numbers[i]);
+      Crystal.attr('src', 'assets/images/crystalEDIT.png')
+      Crystal.attr('alt', 'crystals');
+      	//CRYSTAL STYLE
+      Crystal.addClass('crystalImg');
+      	//ADD CRYSTAL DATA TO CRYSTALS DIV
+      $('#crystals').append(Crystal);
+    }
+    	//CRYSTAL ANIMATION
+    $(".crystalImg").hover(function(){
+    	$(this).animate({ marginBottom: "30px" });
+		}, function() {
+    	$(this).animate({ marginBottom: "0px" });
+		});
+    	//CRYSTAL CLICK FUNCTION
+    $('.crystalImg').on('click', function(){
+      counter = counter + parseInt($(this).data('num'));
+      	//CREATE PLAYER COUNTER
+      $('#playerCounter').text(counter);
+      if (counter == randomNum){
+        alert('You won!');
+      }else if( counter > randomNum){
+        alert('You lost!');
+      }
+    });
+
+  });
+
+$(".crystalImg").hover(function(){
+    $(this).animate({ marginBottom: "30px" });
+	}, function() {
+    $(this).animate({ marginBottom: "0px" });
+});
 
 
