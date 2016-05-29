@@ -26,19 +26,16 @@ var playerScore = 0;
 window.onload = function gameDisplay() {
 	$('#randomNumber').html(x).addClass("numberFormat");
 	$('#playerCounter').html(playerScore).addClass("numberFormat");
-
- //ADD RANDOM VALUES TO THE BUTTONS
-	function addValue() {
-		var valueGen = Math.floor((Math.random() * 12) + 1);
-		$("#button1").append(valueGen);
-	}
-	addValue();
-
-	$("#button1").on("click", function() {
-		$("#button1").html(addValue);
+		var btn1 = $("#button1").data("num", Math.floor((Math.random() * 12) + 1));
+		var btn2 = $("#button2").data("num", Math.floor((Math.random() * 12) + 1));
+		var btn3 = $("#button3").data("num", Math.floor((Math.random() * 12) + 1));
+		var btn4 = $("#button4").data("num", Math.floor((Math.random() * 12) + 1));
+//TAKE THOSE VALUES AND ADD THEM TO THE COUNTER ON CLICK OF THE BUTTON
+	$("button").on("click", function() {
+		$( "#playerCounter" ).append( $( "#button1" ).data( "num" ) );
+		
 	})
 }
-
 
 
 
