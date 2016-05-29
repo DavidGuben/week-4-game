@@ -23,48 +23,72 @@ $( document ).ready(function() {
 
     var counter = 0;
 
+    var wins = "";
+
+    var losses = "";
+
     var numbers = [4, 10, 2, 6];
+
+        function randomFunc() {
+    	var randomNum = Math.floor(Math.random() * 120) + 19;
+    }
+
     	//NUMBER TO BEAT
     $('#randomNumber').text(randomNum);
+    	
     	//YOUR NUMBER
-    $("#playerCounter").append("0");
+    $("#playerCounter").append(0);
+
+    	//WINS AND LOSSES COUNTERS
+    $('#wins').append(wins);
+    $('#losses').append(losses);
+    	
     	//LOOP CRYSTAL SETUP
     for (var i=0; i< numbers.length; i++){
 
       var Crystal = $('<img>');
+      	
       	//ADD DATA TO CRYSTALS
       Crystal.attr('data-num', numbers[i]);
       Crystal.attr('src', 'assets/images/crystalEDIT.png')
       Crystal.attr('alt', 'crystals');
+      	
       	//CRYSTAL STYLE
       Crystal.addClass('crystalImg');
+      	
       	//ADD CRYSTAL DATA TO CRYSTALS DIV
       $('#crystals').append(Crystal);
     }
+    	
     	//CRYSTAL ANIMATION
     $(".crystalImg").hover(function(){
     	$(this).animate({ marginBottom: "30px" });
 		}, function() {
     	$(this).animate({ marginBottom: "0px" });
 		});
+    	
     	//CRYSTAL CLICK FUNCTION
     $('.crystalImg').on('click', function(){
       counter = counter + parseInt($(this).data('num'));
+      	
       	//CREATE PLAYER COUNTER
       $('#playerCounter').text(counter);
+
+      //WIN OR LOSE IF STATEMENT
       if (counter == randomNum){
+      	counter = 0;
+      	wins++;
+      	$("#wins").append(" " + wins + " ");
+      	randomFunc();
         alert('You won!');
+
       }else if( counter > randomNum){
+      	counter = 0;
+      	losses++;
+      	$("#losses").append(" " + losses+ " ");
+      	randomFunc();
         alert('You lost!');
       }
     });
 
   });
-
-$(".crystalImg").hover(function(){
-    $(this).animate({ marginBottom: "30px" });
-	}, function() {
-    $(this).animate({ marginBottom: "0px" });
-});
-
-
